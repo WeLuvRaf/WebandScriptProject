@@ -6,27 +6,28 @@
     <title>To-Do List</title>
 </head>
 
-
-
 <body>
+    
+    <header>
+        <img src="images/img1.png" alt="Task Manager Logo" width="100px" height="100px"> 
+        <span>Task Manager</span>
+    </header>
+
     <h1>My To-Do List</h1>
 
-    <!-- Form to add a new task -->
     <form id="addTaskForm">
         <input type="text" id="newTask" placeholder="Add a new task" required>
         <button type="submit">Add Task</button>
     </form>
 
-    <!-- List of tasks -->
     <ul id="taskList">
-        <!-- Tasks will be dynamically added here -->
+        
     </ul>
 
     <script>
-        // Array to store tasks (this is kept client-side now)
+        
         let tasks = [];
 
-        // Handle adding a new task
         const addTaskForm = document.getElementById('addTaskForm');
         const newTaskInput = document.getElementById('newTask');
         const taskList = document.getElementById('taskList');
@@ -35,16 +36,9 @@
             event.preventDefault();
             const task = newTaskInput.value.trim();
             if (task !== "") {
-                // Add the task to the tasks array
                 tasks.push(task);
-
-                // Clear the input field
                 newTaskInput.value = '';
-
-                // Update the task list in the DOM
                 renderTasks();
-                
-                // Send the task to the server (optional, to keep the tasks persistent on the server)
                 fetch('/add', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -52,19 +46,28 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    tasks = data.tasks; // Update the tasks from server
+                    tasks = data.tasks;
                     renderTasks();
                 })
                 .catch(error => console.error('Error:', error));
             }
         });
 
-        // Function to render the tasks in the DOM
         function renderTasks() {
-            taskList.innerHTML = ''; // Clear the list
-            tasks.forEach(function(task) {
+            taskList.innerHTML = '';
+            tasks.forEach(function(task, index) {
                 const li = document.createElement('li');
-                li.textContent = task;
+                const taskText = document.createElement('span');
+                taskText.textContent = task;
+                li.appendChild(taskText);
+
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Edit';
+                editBtn.className = 'editBtn';
+                editBtn.onclick = function() {
+                    editTask(index);
+                };
+                li.appendChild(editBtn);
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = 'Delete';
@@ -72,22 +75,36 @@
                 deleteBtn.onclick = function() {
                     deleteTask(task);
                 };
-
                 li.appendChild(deleteBtn);
+
                 taskList.appendChild(li);
             });
         }
 
-        // Handle deleting a task
+        function editTask(index) {
+            const newTaskText = prompt('Edit task:', tasks[index]);
+            if (newTaskText !== null && newTaskText.trim() !== "") {
+                tasks[index] = newTaskText.trim();
+                renderTasks();
+                fetch('/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `oldTask=${encodeURIComponent(tasks[index])}&updatedTask=${encodeURIComponent(newTaskText.trim())}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    tasks = data.tasks;
+                    renderTasks();
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
         function deleteTask(task) {
             tasks = tasks.filter(function(t) {
                 return t !== task;
             });
-
-            // Update the task list in the DOM
             renderTasks();
-
-            // Send the task to the server to delete it
             fetch('/delete', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -95,11 +112,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                tasks = data.tasks; // Update the tasks from server
+                tasks = data.tasks;
                 renderTasks();
             })
             .catch(error => console.error('Error:', error));
         }
     </script>
+
+    <footer>
+        <p>Copyright © 2024 Task Master All Rights Reserved</p>
+    </footer>
 </body>
 </html>
+
