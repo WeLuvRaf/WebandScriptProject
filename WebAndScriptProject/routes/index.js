@@ -7,3 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+app.get('/', (req, res) => {
+  res.render('index', { toDoList });
+});
