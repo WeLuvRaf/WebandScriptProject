@@ -12,50 +12,6 @@
       <span>Task Manager</span>
     </header>
 
-    <section>
-      <h2>Create a New To-Do Item</h2>
-      <form action="/add" method="POST">
-          <input type="text" name="title" placeholder="Title" required>
-          <input type="text" name="description" placeholder="Description" required>
-          <button type="submit">Add Task</button>
-      </form>
-  </section>
-
-  <section>
-      <h2>To-Do List</h2>
-      <table>
-          <thead>
-              <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-              </tr>
-          </thead>
-          <tbody>
-              <% toDoList.forEach(item => { %>
-                  <tr>
-                      <td><%= item.title %></td>
-                      <td><%= item.description %></td>
-                      <td><%= item.status %></td>
-                      <td>
-                          <form action="/update/<%= item.id %>" method="POST" style="display:inline;">
-                              <button type="submit">Toggle Status</button>
-                          </form>
-                          <form action="/delete/<%= item.id %>" method="POST" style="display:inline;">
-                              <button type="submit">Delete</button>
-                          </form>
-                      </td>
-                  </tr>
-              <% }) %>
-          </tbody>
-      </table>
-  </section>
-
-  <script src="index.js"></script>
-
-
-
     <footer>
       <p>Copyright © 2024 Task Master All Rights Reserved</p>
     </footer>
