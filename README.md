@@ -1,7 +1,7 @@
 # **Task Master**  
 A simple To-Do List web application with user authentication and task management functionality.
 
-**Task Master** is a full-stack web application that allows users to create, manage, and edit their to-do lists. The application integrates user authentication to provide a secure and personalized experience. s.
+**Task Master** is a full-stack web application that allows users to create, manage, and edit their to-do lists. The application integrates user authentication to provide a secure and personalized experience. 
 
 
 
