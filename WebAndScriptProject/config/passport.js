@@ -3,16 +3,16 @@ var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
 
 // Temporary storage for users (will use database later)
-var users = [];
+const { users } = require('../userStore'); // Import shared user array
 
-module.exports = function(passport) {
+module.exports = function (passport) {
   passport.use(
-    new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
-      var user = users.find(user => user.email === email);
+    new LocalStrategy({ usernameField: 'email' }, function (email, password, done) {
+      var user = users.find((user) => user.email === email);
       if (!user) {
         return done(null, false, { message: 'No user found' });
       }
-      bcrypt.compare(password, user.password, function(err, isMatch) {
+      bcrypt.compare(password, user.password, function (err, isMatch) {
         if (err) throw err;
         if (isMatch) {
           return done(null, user);
@@ -22,11 +22,19 @@ module.exports = function(passport) {
       });
     })
   );
-  passport.serializeUser(function(user, done) {
+
+  passport.serializeUser(function (user, done) {
+    console.log('Serializing user:', user.id);
     done(null, user.id);
   });
-  passport.deserializeUser(function(id, done) {
-    var user = users.find(user => user.id === id);
-    done(null, user);
+
+  passport.deserializeUser(function (id, done) {
+    console.log('Deserializing user with ID:', id);
+    var user = users.find((user) => user.id === id);
+    if (user) {
+      done(null, user);
+    } else {
+      done(new Error('User not found'));
+    }
   });
 };

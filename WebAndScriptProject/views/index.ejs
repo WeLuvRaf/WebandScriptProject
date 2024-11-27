@@ -4,25 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <style>
+        .flash-message {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    
     <header>
-        <img src="images/img1.png" alt="Task Manager Logo" width="100px" height="100px"> 
+        <img src="images/img1.png" alt="Task Manager Logo" width="100px" height="100px">
         <span>Task Master</span>
+        <nav>
+            <% if (!user) { %>
+                <a href="/auth/login">Login</a>
+                <a href="/auth/register">Register</a>
+            <% } else { %>
+                <a href="/auth/logout">Logout</a>
+            <% } %>
+        </nav>
     </header>
-
+    
+    <!-- Flash Messages -->
+    <% if (success_msg) { %>
+        <p class="flash-message"><%= success_msg %></p>
+    <% } %>
+    <% if (error_msg) { %>
+        <p class="error-message"><%= error_msg %></p>
+    <% } %>
+    
     <h1>My To-Do List</h1>
-
-    <form id="addTaskForm">
-        <input type="text" id="newTask" placeholder="Add a new task" required>
-        <button type="submit">Add Task</button>
-    </form>
-
-    <ul id="taskList">
-        
-    </ul>
+    
+    <% if (user) { %>
+        <form id="addTaskForm">
+            <input type="text" id="newTask" placeholder="Add a new task" required>
+            <button type="submit">Add Task</button>
+        </form>
+    
+        <ul id="taskList"></ul>
+    <% } else { %>
+        <p>Please <a href="/auth/login">log in</a> to manage your tasks.</p>
+    <% } %>
+    
 
     <script>
         
@@ -124,4 +153,3 @@
     </footer>
 </body>
 </html>
-
