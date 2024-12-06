@@ -32,27 +32,39 @@
         </nav>
     </header>
     
-    <!-- Flash Messages -->
     <% if (success_msg) { %>
         <p class="flash-message"><%= success_msg %></p>
     <% } %>
     <% if (error_msg) { %>
         <p class="error-message"><%= error_msg %></p>
     <% } %>
+
+    <div id="to-do-description">
+        <p>Task Master is your new best friend for staying on top of everything! Whether it's work, study, or personal projects, this app helps you create, organize, and check off your tasks with ease. Say goodbye to scattered to-do lists and hello to a streamlined, stress-free day. With secure login, you can access your tasks anywhere, anytime—on any device. Plus, it’s super easy to use, so you can focus on what matters most: getting things done! Ready to conquer your to-do list? Let’s get started!</p>
+    </div>
+
+    <div id="main-content">
+        <div id="to-do-title">
+            <h1>My To-Do List</h1>
+        </div>
+
+        <% if (user) { %>
+            <div id="task-form">
+                <form id="addTaskForm">
+                    <input type="text" id="newTask" placeholder="Add a new task" required>
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
     
-    <h1>My To-Do List</h1>
-    
-    <% if (user) { %>
-        <form id="addTaskForm">
-            <input type="text" id="newTask" placeholder="Add a new task" required>
-            <button type="submit">Add Task</button>
-        </form>
-    
-        <ul id="taskList"></ul>
-    <% } else { %>
-        <p>Please <a href="/auth/login">log in</a> to manage your tasks.</p>
-    <% } %>
-    
+            <div id="task-list">
+                <ul id="taskList"></ul>
+            </div>
+        <% } else { %>
+            <div id="login-prompt">
+                <p>Please <a href="/auth/login">log in</a> to manage your tasks.</p>
+            </div>
+        <% } %>
+    </div>
 
     <script>
         

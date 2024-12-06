@@ -84,7 +84,7 @@ header img {
 }
 
 header span {
-  font-size: 1.5rem;
+  font-size: 5rem;
   font-weight: bold;
   margin-left: 10px;
 }
@@ -182,3 +182,149 @@ footer .back-to-top:hover {
     margin-top: 10px;
   }
 }
+
+#to-do-description {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#to-do-description p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  font-family: 'Arial', sans-serif;
+}
+
+#to-do-description p strong {
+  font-weight: bold;
+  color: #d62b70;
+}
+
+@media (max-width: 768px) {
+  #to-do-description {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  #to-do-description p {
+    font-size: 1rem;
+  }
+}
+
+#main-content {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#to-do-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#to-do-title h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+#task-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#task-form form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+#newTask {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#task-form button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #d62b70;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#task-form button:hover {
+  background-color: #b61e56;
+}
+
+#task-list {
+  margin-top: 20px;
+}
+
+#taskList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#taskList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#taskList li span {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+#taskList li button {
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: #d62b70;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#taskList li button:hover {
+  background-color: #b61e56;
+}
+
+#login-prompt {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.2rem;
+}
+
+#login-prompt a {
+  color: #d62b70;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#login-prompt a:hover {
+  text-decoration: underline;
+}
+
