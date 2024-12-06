@@ -1,12 +1,6 @@
 body {
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #f9f9f9;
-  margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .form-container {
