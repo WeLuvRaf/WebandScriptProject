@@ -1,9 +1,7 @@
-// Load Passport's Local Strategy and bcrypt for password hashing
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require('bcryptjs');
 
-// Temporary storage for users (will use database later)
-const { users } = require('../userStore'); // Import shared user array
+const { users } = require('../userStore'); 
 
 module.exports = function (passport) {
   passport.use(
